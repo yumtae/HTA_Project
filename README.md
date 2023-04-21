@@ -2,8 +2,8 @@
   과정명 : 컨테이너 애플리케이션 가상화를 통한 Cloud Office 구축 프로젝트 과정 <br/>
   관련분야 - 잔디, 슬랙 <br/>
   사용언어 - Java, HTML, CSS, Bootstrap, JSP, EL, JSTL, JavaScript, jQuery, Ajax, JSON, SQL <br/>
-  개발도구 - Eclipse IDE <br/>
-  기타 S/W - 구글차트 / FullCalendar <br/> <br/>
+  개발도구 - Eclipse IDE ,sts, eclipse <br/>
+  기타 S/W - 구글차트 , mybatis, 스프링부트, chart.js, scrollbar.js, fullcalendar.js <br/> <br/>
 
   목적 -  <br/>
     팀 커뮤니케이션, 할 일 및 일정 관리, 파일 공유, 게시글 작성 등 사내 원활한 업무 공유를 위한 협업 툴을 구현하는 것을 목적으로 한다. <br/>
