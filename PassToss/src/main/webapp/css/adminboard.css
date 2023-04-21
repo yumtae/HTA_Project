@@ -1,0 +1,87 @@
+.content{
+	background:white;
+	border:1px solid lightgray;
+	padding:10px;
+	width: 80%;
+	display:inline-block;
+}
+
+thead>tr>th:nth-child(1){
+	font-size:30px;
+}
+.count{
+	font-size:15px;
+}
+#viewcount {
+	width:80px;
+	text-align: center;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+.category {
+	float: right;
+	margin-right:2rem;
+	border: 1px solid lightgray;
+	padding:0;
+}
+
+.category div{
+	text-align:center;
+	font-size:20px;
+	font-weight:bold;
+	background:black;
+	color:white;
+}
+
+.category>ul {
+	padding-left:0;
+}
+
+.category>ul>li {
+	padding: 20px 80px 20px 10px;
+	list-style: none;
+}
+
+.category>ul>li:hover {
+	background:#f6f6f6;
+}
+
+.category>ul>li.active {
+	background:#f6f6f6;
+	border-right: 3px solid #6288f8
+}
+
+.category>ul>li>a {
+	font-size: 15px;
+	color:black;		
+}
+.menu{
+	list-style:none;
+	padding-left:0;
+}
+
+.board_view:hover {
+	opacity: 0.7;
+	color: red;
+}
+
+.delete {
+	float: right;
+}
+.delete:hover{
+	opacity:0.7;
+}
+
+.delete>input {
+	width: 40px;
+	height: 40px;
+}
+
+#search{
+	width:350px;
+	float:right;
+}
