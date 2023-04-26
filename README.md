@@ -40,4 +40,4 @@
   김현지 - 파일함, 채팅  <br/>
   최소리 - 캘린더, 어드민페이지 <br/>
 
-
+시연영상 - https://youtu.be/FPnHlIZReBc
