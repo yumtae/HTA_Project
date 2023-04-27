@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.passtoss.myhome.mybatis.mapper.AlarmMapper">
+
+		
+
+	<insert id="insertAlarmLog">
+
+	    INSERT ALL
+	    <foreach collection="idList" item="ID" separator=" ">
+	        INTO ALARM_LOG ( BOARD_NUM,WRITER, ID, SUBJECT, READ_YN, WRITE_DATE) 
+	        VALUES ( #{BOARD_NUM}, #{WRITER}, #{ID}, #{SUBJECT}, 0, sysdate)
+	    </foreach>
+	    SELECT 1 FROM DUAL
+	</insert>
+
+
+	<update id="readAlarmLog">
+		update alarm_log set  READ_YN = '1'
+		where ID =#{ID}
+	</update>
+	
+	<select id="getAlarmLog"  resultType="java.util.Map">
+		select alarm_log.BOARD_NUM,alarm_log.WRITER,alarm_log.ID,alarm_log.SUBJECT
+		,alarm_log.READ_YN,alarm_log.WRITE_DATE,member.username
+		from alarm_log 
+		left join member
+		on (member.ID= alarm_log.WRITER)
+		where alarm_log.ID =#{ID}
+		order by WRITE_DATE desc
+	
+	</select>
+	
+
+</mapper>

@@ -1,0 +1,74 @@
+#createProject {
+	margin: 5rem auto;
+}
+
+.main-wrap {
+	width: 700px;
+	margin: 0 auto;
+	background: white;
+	border-radius: 20px;
+}
+
+.title {
+	padding: 50px 0 16px;
+	font-size: 36px;
+	color: #333;
+	font-weight: 700;
+	text-align: center;
+}
+
+.input-wrap {
+	width: 586px;
+	margin: 80px auto 0 auto;
+	text-align: center;
+}
+
+label {
+	margin-top: 30px;
+	display: block;
+	text-align: left;
+}
+
+.input-name {
+	margin-bottom: 10px;
+	padding: 3px 0;
+	font-size: 16px;
+	color: #333;
+	font-weight: 700;
+	text-align: left;
+}
+
+.input {
+	color: #333;
+	font-size: 16px;
+	height: 50px;
+	width: 560px;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	box-sizing: border-box;
+	padding-left: 20px;
+}
+
+.input:focus {
+	outline: none;
+	color: #333;
+	border: 1px solid #989898;
+	box-shadow: 2px 2px 6px rgba(0, 0, 0, .15);
+}
+
+.message{
+	margin-top:5px;
+	color:red;
+}
+
+.input-textarea {
+	padding: 20px;
+	height: 100px;
+	resize: none;
+}
+
+button {
+	width: 250px;
+	height: 45px;
+	margin: 3rem 0 20px 0;
+}

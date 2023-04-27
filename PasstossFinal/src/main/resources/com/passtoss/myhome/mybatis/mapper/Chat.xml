@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.passtoss.myhome.mybatis.mapper.ChatMapper">
+	
+		<sql id="contactList">
+			select m.profile_img, m.username, m.id, c.company_name, m.auth
+			from member m, company c
+			where m.company_id = (select company_id 
+			    				  from member
+			    				  where id = #{chat_id})
+			and c.company_id = m.company_id
+		</sql>
+		
+		<select id="getContactList" resultType="Map">
+			<include refid="contactList"/>
+			 and m.id != #{chat_id}
+		</select>
+		
+		<select id="getSearchList" resultType="Map">
+			select * 
+			from(<include refid="contactList"/>
+				 and m.id != #{chat_id}) 
+			where username like '%' || #{searchword} || '%'
+		</select>
+
+		<select id="getParticipantsList" resultType="Map">
+			 <include refid="contactList"/>
+		</select>
+		
+		<select id="getRoom" resultType="Map">
+			select roomnumber
+			from chat_member
+			where roomnumber in (select roomnumber
+			   					 from chat_member
+			   					 where id = #{user1})
+			and id =#{user2}
+			<if test="user1 == user2">
+				group by roomnumber
+				having count(*)=2
+			</if>
+		</select>
+		
+		<insert id="createRoom">
+			INSERT ALL
+			INTO chat_member (roomnumber, id) VALUES ((select nvl(max(roomnumber),0)+1 from chat_member), #{user1})
+			INTO chat_member (roomnumber, id) VALUES ((select nvl(max(roomnumber),0)+1 from chat_member), #{user2})
+			SELECT 1 FROM DUAL
+		</insert>
+		
+		<insert id="chatSave">
+			insert into chat_log
+			(roomNumber, CHAT_DATE, CHAT_SENDER, CHAT_ID, CHAT_CONTENT, CHAT_PROFILE, CHAT_FILE, CHAT_ORIGINAL)
+			values(#{roomNumber}, sysdate, #{chat_sender}, 
+				#{chat_id}, #{chat_content}, #{chat_profile},
+			<if test="chat_file != null and chat_original != null">
+				#{chat_file}, #{chat_original}
+			</if>
+			<if test="chat_file == null or chat_original == null">
+				null, null 
+			</if>
+			)
+		</insert>
+
+		<!-- 파일 추가 하기 전  
+		<insert id="chatSave">
+			insert into chat_log
+			(roomNumber, CHAT_DATE, CHAT_SENDER, CHAT_ID, CHAT_CONTENT, CHAT_PROFILE)
+			values(#{roomNumber}, sysdate, 
+				#{chat_sender}, #{chat_id}, #{chat_content}, #{chat_profile})
+		</insert>
+		-->
+		
+		<select id="getChatLog" resultType="Chat">
+			select * 
+			from chat_log
+			where roomNumber = #{roomNumber}
+			order by chat_date
+		</select>
+		
+		<select id="getChat" resultType="Chat">
+			select * 
+			from(select *
+				 from chat_log
+				 where roomNumber = #{roomNumber}
+				 order by chat_date desc)
+			where rownum = 1
+		</select>
+		
+		<select id="getChatList" resultType="Map">
+			select * 
+			from 
+			(select roomnumber, chat_date, chat_content
+			from chat_log
+			where (roomnumber, chat_date) in (select cm.roomnumber, (select max(chat_date)
+										  	         				 from chat_log
+										               				 where cm.roomnumber = chat_log.roomnumber)
+						   		    		  from member m join chat_member cm
+			    			  		    	  on m.id = cm.id				  
+						  		    		  where m.id !=#{id}
+								    		  and cm.roomnumber in(select cm2.roomnumber
+												 				   from chat_member cm2
+												 				   where cm2.id = #{id})))a join 
+			(select m.profile_img, m.username, m.id, cm.roomnumber, m.status
+			from member m join chat_member cm
+			on m.id = cm.id
+			where m.id !=#{id}) b 
+			on a.roomnumber = b.roomnumber
+		</select>
+		
+		<select id="getChatSearch" resultType="Map">
+			select * 
+			from 
+			(select roomnumber, chat_date, chat_content
+			from chat_log
+			where (roomnumber, chat_date) in (select cm.roomnumber, (select max(chat_date)
+										  	         				 from chat_log
+										               				 where cm.roomnumber = chat_log.roomnumber)
+						   		    		  from member m join chat_member cm
+			    			  		    	  on m.id = cm.id				  
+						  		    		  where m.id != #{id}))a join 
+			(select m.profile_img, m.username, m.id, cm.roomnumber, m.status
+			from member m join chat_member cm
+			on m.id = cm.id
+			where m.id != #{id}) b 
+			on a.roomnumber = b.roomnumber
+			where username like '%' || #{searchword} || '%' 
+		</select>
+		
+		<update id="saveStatus">
+			update member
+			set status = #{status}
+			where id = #{id}
+		</update>
+		
+		<select id="getStatus" resultType="Map">
+			select status, profile_img
+			from member
+			where id = #{id}
+		</select>
+</mapper>

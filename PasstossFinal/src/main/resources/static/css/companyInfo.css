@@ -1,0 +1,49 @@
+input[type=text] {
+	outline: none;
+	border: 1px solid #ddd;
+}
+
+.setting-item {
+	margin-bottom: 2rem
+}
+
+h6 {
+	color: black;
+}
+
+.message {
+	color: red;
+}
+
+img {
+	max-width: 400px;
+	max-height: 100px;
+}
+
+.logo {
+	margin-top: 1rem;
+}
+
+.img-wrap {
+	width: 400px;
+	height: 100px;
+}
+
+.btn-danger {
+	margin-top: 7px;
+}
+
+.notice {
+	font-size: 12px;
+}
+
+.company-url {
+	color: #4e73df;
+	width: 200px;
+	font-weight: 700
+}
+
+.option-message {
+	font-size: 13px;
+	font-weight: 700;
+}

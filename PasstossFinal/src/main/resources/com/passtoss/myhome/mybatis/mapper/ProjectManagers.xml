@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.passtoss.myhome.mybatis.mapper.ProjectManagersMapper">
+
+
+
+	<insert id="insertProjectManager">
+		
+		<selectKey resultType="int" order="BEFORE" keyProperty="NUM" >
+			select nvl(max(NUM),0)+1 from PROJECTMANAGERS
+		</selectKey>
+		
+		insert into PROJECTMANAGERS values
+			(#{NUM} , #{BOARD_NUM} , #{ID} )
+			
+			
+	</insert>
+	
+	<delete id="deleteProjectManagerNum">
+		delete from  projectmanagers where board_num=#{BOARD_NUM}
+	</delete>
+	
+	
+	<select id="getProjectManager">
+		select * from projectmanagers where  board_num = #{BOARD_NUM}
+	</select>
+	
+	
+	
+
+</mapper>

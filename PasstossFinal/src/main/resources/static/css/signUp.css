@@ -1,0 +1,404 @@
+.message {
+	color: red;
+	margin-top: 5px;
+}
+
+/** 회원가입 메뉴선택 창 **/
+#join-select .join-wrap {
+	margin: 3rem auto;
+	width: 700px;
+	height: 700px;
+	background: white;
+	border-radius: 20px;
+}
+
+#join-select .join-title {
+	padding-top: 40px;
+	font-size: 36px;
+	color: #333;
+	font-weight: 700;
+	text-align: center;
+	margin-bottom: 100px;
+}
+
+#join-select .join-menu {
+	position: relative;
+	width: 80%;
+	justify-content: center;
+	margin: 30px auto;
+	padding: 44px 170px 56px 30px;
+	background: #fcfbff;
+	border: 1px solid #c6b6f6;
+	border-radius: 20px;
+	cursor: pointer;
+}
+
+#join-select .join-menu:hover {
+	color: #623ad6;
+	border-color: #623ad6;
+}
+
+#join-select b {
+	font-size: 30px;
+	color: #623ad6;
+}
+
+#join-select .menuImg {
+	display: inline-block;
+	width: 170px;
+	position: absolute;
+	right: 9px;
+	bottom: 0;
+}
+
+#NewCompany img {
+	bottom: 0
+}
+
+.d-none {
+	display: none
+}
+
+/** 개인정보 입력 창 **/
+#join-info .join-wrap {
+	width: 700px;
+	margin: 3rem auto;
+	background: white;
+	border-radius: 20px;
+}
+
+#join-info .join-title {
+	padding: 20px 0 16px;
+	font-size: 36px;
+	color: #333;
+	font-weight: 700;
+	text-align: center;
+}
+
+#join-info .join-subtitle {
+	margin: 0 auto;
+	padding: 0 20px;
+	font-weight: 500;
+	font-size: 18px;
+	color: #333;
+	text-align: center;
+	line-height: 27px;
+}
+
+#join-info .join-form-wrap {
+	width: 586px;
+	margin: 80px auto 0 auto;
+	text-align: center;
+}
+
+#join-info label {
+	margin-top: 30px;
+	display: block;
+	text-align: left;
+}
+
+#join-info .input-name {
+	display: inline-block;
+	margin-bottom: 10px;
+	padding: 3px 0;
+	font-size: 16px;
+	color: #333;
+	font-weight: 700;
+	text-align: left;
+}
+
+#join-info .join-input {
+	color: #333;
+	font-size: 16px;
+	height: 50px;
+	width: 560px;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	box-sizing: border-box;
+	padding-left: 20px;
+}
+
+#join-info .join-input:focus {
+	outline: none;
+	color: #333;
+	border: 1px solid #989898;
+	box-shadow: 2px 2px 6px rgba(0, 0, 0, .15);
+}
+
+#join-info .join-button {
+	margin: 30px 0 50px;
+	width: 560px;
+	height: 50px;
+	display: inline-block;
+}
+
+#join-info .modal-header, .modal-footer {
+	border: none;
+}
+
+#join-info .authInfo {
+	text-align: center;
+}
+
+#join-info input {
+	border: 0
+}
+
+#join-info .authInput {
+	outline: none;
+	border-bottom: 1px solid #777;
+	margin-top: 10px;
+	width: 100%;
+	height: 40px;
+	font-size: 20px;
+	font-weight: 300;
+	text-align: center;
+}
+
+#join-info .modal-title {
+	color: black;
+	font-weight: bold;
+}
+
+#join-info .modal-body {
+	color: #555;
+	font-weight: 500;
+}
+
+#join-info .input-wrap {
+	position: relative;
+}
+
+#authTime-count {
+	position: absolute;
+	right: 15px;
+	top: 22px;
+	color: #ff6b6b;
+	font-weight: 500;
+}
+
+#authMessage {
+	color: red
+}
+
+/** 회사정보 입력 창 **/
+#join-companyInfo .join-wrap {
+	width: 700px;
+	height: 700px;
+	margin: 3rem auto;
+	background: white;
+	border-radius: 20px;
+}
+
+#join-companyInfo .join-title {
+	padding: 20px 0 16px;
+	font-size: 36px;
+	color: #333;
+	font-weight: 700;
+	text-align: center;
+}
+
+#join-companyInfo .join-subtitle {
+	margin: 0 auto;
+	padding: 0 20px;
+	font-weight: 500;
+	font-size: 18px;
+	color: #333;
+	text-align: center;
+	line-height: 27px;
+}
+
+#join-companyInfo .join-form-wrap {
+	width: 586px;
+	margin: 80px auto 0 auto;
+	text-align: center;
+}
+
+#join-companyInfo label {
+	margin-top: 30px;
+	display: block;
+	text-align: left;
+}
+
+#join-companyInfo .input-name {
+	margin-bottom: 10px;
+	padding: 3px 0;
+	font-size: 16px;
+	color: #333;
+	font-weight: 700;
+	text-align: left;
+}
+
+#join-companyInfo .join-input {
+	color: #333;
+	font-size: 16px;
+	height: 50px;
+	width: 560px;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	box-sizing: border-box;
+	padding-left: 20px;
+}
+
+#join-companyInfo .join-input:focus, select:focus {
+	outline: none;
+	color: #333;
+	border: 1px solid #989898;
+	box-shadow: 2px 2px 6px rgba(0, 0, 0, .15);
+}
+
+#join-companyInfo .url {
+	width: 400px;
+}
+
+#join-companyInfo select {
+	width: 560px;
+	height: 52px;
+	padding-left: 20px;
+	font-size: 16px;
+	background: #fff;
+	border: 1px solid #ddd;
+	color: #333;
+	box-sizing: border-box;
+	border-radius: 8px;
+}
+
+#join-companyInfo .submit {
+	width: 560px;
+	padding: 13px;
+	float: left;
+}
+
+/** 기존회사 참여 **/
+#join-companyURL .join-wrap {
+	width: 700px;
+	height: 500px;
+	margin: 3rem auto;
+	background: white;
+	border-radius: 20px;
+}
+
+#join-companyURL .join-title {
+	padding: 20px 0 16px;
+	font-size: 36px;
+	color: #333;
+	font-weight: 700;
+	text-align: center;
+}
+
+#join-companyURL .join-subtitle {
+	margin: 0 auto;
+	padding: 0 20px;
+	font-weight: 500;
+	font-size: 18px;
+	color: #333;
+	text-align: center;
+	line-height: 27px;
+}
+
+#join-companyURL .join-form-wrap {
+	width: 586px;
+	margin: 80px auto 0 auto;
+	text-align: center;
+}
+
+#join-companyURL .input-name {
+	margin-bottom: 10px;
+	padding: 3px 0;
+	font-size: 16px;
+	color: #333;
+	font-weight: 700;
+	text-align: left;
+}
+
+#join-companyURL label span {
+	color: #333;
+}
+
+#join-companyURL .join-input {
+	color: #333;
+	font-size: 16px;
+	height: 50px;
+	width: 560px;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	box-sizing: border-box;
+	padding-left: 20px;
+}
+
+#join-companyURL .join-input:focus, select:focus {
+	outline: none;
+	color: #333;
+	border: 1px solid #989898;
+	box-shadow: 2px 2px 6px rgba(0, 0, 0, .15);
+}
+
+#join-companyURL .url {
+	width: 400px;
+}
+
+#join-companyURL .helpMsg {
+	float: left;
+	font-size: 15px;
+	font-weight: 600;
+	color: #4e73df;
+}
+
+#join-companyURL .join-button {
+	width: 560px;
+	height: 50px;
+	display: inline-block;
+	float: left;
+}
+
+#join-companyURL .modal-header, #join-companyURL .modal-footer {
+	border: none;
+}
+
+#join-companyURL .modal-header {
+	padding-bottom: 0;
+}
+
+#join-companyURL .modal-title {
+	color: black;
+	font-weight: bold;
+}
+
+#join-companyURL .modal-body {
+	color: #555;
+	font-weight: 500;
+}
+
+#join-companyURL .input-wrap {
+	margin: 0 auto;
+	width: 100%;
+	background: #4e73df1a;
+	border-radius: 5px;
+	text-align: center;
+}
+
+#urlMessage {
+	text-align: left;
+}
+
+#join-companyURL .urlInfo {
+	padding-bottom:10px;
+}
+
+#join-companyURL .submit {
+	width: 50%;
+	margin: 0 auto;
+}
+#join-companyURL .modal-body{
+	padding-bottom:0;
+}
+#join-companyURL .modal-footer{
+	padding-top:0;
+}
+#companyLogo {
+	width: 50px;
+	margin: 10px 0 10px 0;
+}
+#comName{
+	margin-bottom:0;
+}

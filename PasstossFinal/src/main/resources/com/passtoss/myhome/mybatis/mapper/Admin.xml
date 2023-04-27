@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.passtoss.myhome.mybatis.mapper.AdminMapper">
+
+  <select id="getListCount" resultType="int">
+		 select count(*) from company
+	  </select>
+	  
+	  
+<!-- include안했을 경우는 member2.xml에 있음 -->
+	<select id="getSearchListCount" resultType="int">
+		select count(*) from company
+		 <include refid="search_"/>
+	</select>
+	
+	<select id="getSearchList" resultType="company">
+		select * 
+		from (select m.*, rownum rnum
+			  from (select * from company
+			  		
+					 <include refid="search_"/>
+					  order by company_id)m
+			  where rownum &lt;= #{end})
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+	
+	<sql id="search_">
+		<if test ="search_field != null">
+			and
+			<choose>
+				<when test='search_field=="company_id"'>company_id</when>
+				<when test='search_field=="company_name"'>company_name</when>
+				<when test='search_field=="ceo_id"'>ceo_id</when>
+				
+			</choose>
+			like #{search_word}
+		</if>
+	</sql>
+
+<!--  
+	<insert id="insertBoard">
+		<selectKey resultType="int" order="BEFORE" keyProperty="BOARD_NUM">
+			select nvl(max(BOARD_NUM),0)+1 from board
+		</selectKey>
+				
+				
+		INSERT into board
+				(BOARD_NUM,
+				 PROJECT_ID, BOARD_DIVISION, WRITER,
+				 SUBJECT,CONTENT,PROGRESS,STATUS,PRIORITY,
+				  START_DATE,END_DATE,WRITE_DATE,MODIFY_DATE,
+				 FILE_NAME,ORIGINAL_FILE_NAME,READCOUNT,
+				 BOARD_RE_REF,BOARD_RE_LEV,BOARD_RE_SEQ
+				)
+				 values
+				(#{BOARD_NUM},
+				 #{PROJECT_ID}, #{BOARD_DIVISION}, #{WRITER},
+				#{SUBJECT} , #{CONTENT},#{PROGRESS},#{STATUS},#{PRIORITY},
+				 #{START_DATE},#{END_DATE},sysdate,#{MODIFY_DATE},
+				 #{FILE_NAME},#{ORIGINAL_FILE_NAME},#{READCOUNT},
+				 #{BOARD_NUM},#{BOARD_RE_LEV},#{BOARD_RE_SEQ}
+				 )
+
+			 
+			 
+	</insert>
+	-->
+	
+<select id="getListCount2" resultType="int">
+		 select count(*) from member
+	  </select>
+	  
+	  
+<!-- include안했을 경우는 member2.xml에 있음 -->
+	<select id="getSearchListCount2" resultType="int">
+		select count(*) from member
+		 <include refid="search2_"/>
+	</select>
+	
+	<select id="getSearchList2" resultType="member">
+		select * 
+		from (select m.*, rownum rnum
+			  from (select * from member
+			  		
+					 <include refid="search2_"/>
+					  order by id)m
+			  where rownum &lt;= #{end})
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+	
+	<sql id="search2_">
+		<if test ="search_field != null">
+			and
+			<choose>
+				<when test='search_field=="id"'>id</when>
+				<when test='search_field=="username"'>username</when>
+	
+				
+			</choose>
+			like #{search_word}
+		</if>
+	</sql>
+
+
+<delete id="delete">
+		delete from member
+		where id = #{id}
+	</delete>
+	
+	
+	<update id="beUpdate">
+		update member 
+		set 
+			belong = 1
+		where id =  #{id}
+		
+	</update>
+
+</mapper>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.passtoss.myhome.mybatis.mapper.MemberMapper">
+
+	<select id="isId" resultType="member" parameterType="String">
+		select * from member
+		where id = #{id}
+	</select>
+
+	<select id="isMailAuth" resultType="mailAuth">
+		select * from mailAuth
+		where ID = #{id}
+	</select>
+
+	<insert id="insertMailAuth">
+		insert into mailAuth
+		values(#{id}, #{authNum}, sysdate)
+	</insert>
+
+	<update id="updateMailAuth">
+		update mailAuth
+		set
+		AUTHNUM = #{authNum},
+		SENDTIME = sysdate
+		where ID = #{id}
+	</update>
+	
+	<insert id="createCompany">
+		<selectKey resultType="int" order="BEFORE" keyProperty="company_id">
+			select nvl(max(COMPANY_ID),0)+1 from company
+		</selectKey>
+		insert into company
+		(COMPANY_ID, COMPANY_NAME, CEO_ID, URL, TYPE, ACCESS_OPTION, CREATE_DATE)
+		values(#{company_id}, #{company_name}, #{ceo_id}, #{url}, #{type}, #{access_option}, SYSDATE)
+	</insert>
+	
+	<insert id="insertUser">		
+		<selectKey keyColumn="company_id,access_option" resultType="member" order="BEFORE" keyProperty="company_id,access_option">
+			select company_id, access_option from company
+			where 
+			<if test='memberType.equals("newCompany")'>
+				CEO_ID = #{id}
+			</if>
+			<if test='memberType.equals("joinCompany")'>
+				COMPANY_ID = #{company_id}
+			</if>
+		</selectKey>
+		insert into member
+		(ID, PASSWORD, USERNAME, JOIN_DATE, JOIN_TYPE, BELONG,
+			COMPANY_ID, AUTH, AUTH_STATUS)
+		values
+		(#{id}, #{password}, #{username}, sysdate, #{join_type},
+			<if test='memberType.equals("newCompany")'>#{belong}</if>
+			<if test='memberType.equals("joinCompany")'>#{access_option}</if>,
+			#{company_id}, #{auth}, #{auth_status})
+	</insert>
+	
+	<select id="checkURL" resultType="company">
+		select * from company
+		where url = #{url}
+	</select>
+	
+	<update id="resetPassword">
+		update member
+		set
+		PASSWORD = #{password}
+		where id = #{id}
+	</update>	
+	
+	<select id="getSearchMemberList" resultType="java.util.Map">
+	    SELECT company.COMPANY_ID, member.id, member.USERNAME, member.PROFILE_IMG
+	    FROM company
+	    LEFT JOIN member ON company.COMPANY_ID = member.company_id
+	    WHERE username LIKE '%' || #{searchword} || '%'
+	    <if test="persons != null and persons.size() > 0">
+	        AND member.id NOT IN
+	        <foreach item="person" collection="persons" separator="," open="(" close=")">
+	            #{person}
+	        </foreach>
+	    </if>
+	</select>
+	
+	<update id="updateProfile">
+		update member
+		set
+		<if test='updateType.equals("profileImg")'>
+			profile_img = #{profile_img}
+		</if>
+		<if test='updateType.equals("member")'>
+			phone = #{phone}
+		</if>
+		where id = #{id}
+	</update>
+	
+	<select id="getCompanyInfo" resultType="company">
+		select * from company
+		where company_id = #{company_id}
+	</select>
+	
+	
+	<select id="getCompanyAllID" resultType="String">
+		select ID from member
+		where company_id = #{company_id}
+	</select>
+	
+	
+	
+</mapper>

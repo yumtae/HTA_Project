@@ -1,0 +1,158 @@
+#forgotPassword {
+	padding-top: 6rem;
+}
+
+.row {
+	height: 500px;
+}
+
+.message {
+	margin-top: 5px;
+	color: red
+}
+
+.modal-header, .modal-footer {
+	border: none;
+}
+
+.authInfo {
+	text-align: center;
+}
+
+.authInput {
+	outline: none;
+	border: none;
+	border-bottom: 1px solid #777;
+	margin-top: 10px;
+	width: 100%;
+	height: 40px;
+	font-size: 20px;
+	font-weight: 300;
+	text-align: center;
+}
+
+.modal-title {
+	color: black;
+	font-weight: bold;
+}
+
+.modal-body {
+	color: #555;
+	font-weight: 500;
+}
+
+.input-wrap {
+	position: relative;
+}
+
+#authTime-count {
+	position: absolute;
+	right: 15px;
+	top: 22px;
+	color: #ff6b6b;
+	font-weight: 500;
+}
+
+#authMessage {
+	color: red
+}
+
+#resetPw {
+	margin-top: 5rem;
+}
+
+.resetPw-wrap {
+	width: 700px;
+	margin: 0 auto;
+	background: white;
+	border-radius: 20px;
+}
+
+.resetPw-title {
+	padding: 20px 0 16px;
+	font-size: 36px;
+	color: #333;
+	font-weight: 700;
+	text-align: center;
+}
+
+.resetPw-subtitle {
+	margin: 0 auto;
+	padding: 0 20px;
+	font-weight: 500;
+	font-size: 18px;
+	color: #333;
+	text-align: center;
+	line-height: 27px;
+}
+
+.resetPw-form-wrap {
+	width: 586px;
+	margin: 80px auto 0 auto;
+	text-align: center;
+}
+
+#resetPw label {
+	margin-top: 30px;
+	display: block;
+	text-align: left;
+}
+
+.input-name {
+	display: inline-block;
+	margin-bottom: 10px;
+	padding: 3px 0;
+	font-size: 16px;
+	color: #333;
+	font-weight: 700;
+	text-align: left;
+}
+
+.resetPw-input {
+	color: #333;
+	font-size: 16px;
+	height: 50px;
+	width: 560px;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	box-sizing: border-box;
+	padding-left: 20px;
+}
+
+.resetPw-input:focus {
+	outline: none;
+	color: #333;
+	border: 1px solid #989898;
+	box-shadow: 2px 2px 6px rgba(0, 0, 0, .15);
+}
+
+.resetPw-button {
+	margin: 30px 0 50px;
+	width: 560px;
+	height: 50px;
+	display: inline-block;
+}
+
+.modal-content {
+	text-align: center;
+	padding: 20px;
+}
+
+#completeImg {
+	margin: 0 auto;
+	width: 100px
+}
+
+.title {
+	color: #333;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.content {
+	margin: 0;
+}
+
+.modal-content a {
+	margin-top: 10px;
+}

@@ -1,0 +1,40 @@
+/** 승인 대기화면 **/
+.container {
+	padding-top: 10rem;
+}
+
+.join-wrap {
+	width: 80%;
+	margin: 0 auto;
+	background: white;
+	border-radius: 20px;
+}
+
+.content {
+	text-align: center;
+}
+
+img {
+	margin: 15px auto;
+	width: 50%;
+}
+
+.notice {
+	color: #333;
+	margin: 20px 0 30px 0;
+}
+
+.title {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+p {
+	margin-bottom: 0;
+}
+
+.notice p:nth-child(1) {
+	font-size: 20px;
+	font-weight: 700;
+	margin-bottom: 5px;
+}

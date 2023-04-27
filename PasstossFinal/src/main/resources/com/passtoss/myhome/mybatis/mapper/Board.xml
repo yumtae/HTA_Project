@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.passtoss.myhome.mybatis.mapper.BoardMapper">
+
+
+	<insert id="insertBoard">
+		<selectKey resultType="int" order="BEFORE" keyProperty="BOARD_NUM">
+			select nvl(max(BOARD_NUM),0)+1 from board
+		</selectKey>
+				
+				
+		INSERT into board
+				(BOARD_NUM,
+				 COMPANY_ID, BOARD_DIVISION, WRITER,
+				 SUBJECT,CONTENT,PROGRESS,STATUS,PRIORITY,
+				  START_DATE,END_DATE,WRITE_DATE,MODIFY_DATE,
+				 FILE_NAME,ORIGINAL_FILE_NAME,READCOUNT,
+				 BOARD_RE_REF,BOARD_RE_LEV,BOARD_RE_SEQ
+				)
+				 values
+				(#{BOARD_NUM},
+				 #{COMPANY_ID}, #{BOARD_DIVISION}, #{WRITER},
+				#{SUBJECT} , #{CONTENT},#{PROGRESS},#{STATUS},#{PRIORITY},
+				 #{START_DATE},#{END_DATE},sysdate,#{MODIFY_DATE},
+				 #{FILE_NAME},#{ORIGINAL_FILE_NAME},#{READCOUNT},
+				 #{BOARD_NUM},#{BOARD_RE_LEV},#{BOARD_RE_SEQ}
+				 )
+
+			 
+			 
+	</insert>
+	
+	<delete id="boardDelete">
+		delete from board
+		where 	BOARD_RE_REF = #{BOARD_RE_REF}
+		and		BOARD_RE_LEV <![CDATA[ >= ]]> #{BOARD_RE_LEV}
+		and		BOARD_RE_SEQ <![CDATA[ >= ]]> #{BOARD_RE_SEQ}
+		and 	BOARD_RE_SEQ <![CDATA[ <= ]]> (
+												nvl((select min(BOARD_RE_SEQ)-1
+												from board
+												where 	BOARD_RE_REF = #{BOARD_RE_REF}
+												and 	BOARD_RE_LEV = #{BOARD_RE_LEV}
+												and		BOARD_RE_SEQ <![CDATA[ > ]]> #{BOARD_RE_SEQ}),
+												(select max(BOARD_RE_SEQ)
+												from board
+												where BOARD_RE_REF = #{BOARD_RE_REF}))
+												)
+	</delete>
+	
+	<delete id="boardDeleteOne">
+		delete from board
+		where 	BOARD_NUM = #{BOARD_NUM}
+	</delete>
+	
+	<insert id='boardReply'>
+		<selectKey resultType="int" order ="BEFORE" keyProperty="BOARD_NUM">
+			select nvl(max(board_num),0)+1 from board
+		</selectKey>
+	
+		
+		
+		
+	</insert>
+	
+	
+	
+	<update id="boardUpdate" parameterType="board">
+		update board set 
+				 SUBJECT = #{SUBJECT},
+				 CONTENT = #{CONTENT},
+				 PROGRESS = #{PROGRESS},
+				 STATUS = #{STATUS},
+				 PRIORITY = #{PRIORITY},
+				 START_DATE = #{START_DATE},
+				 MODIFY_DATE = sysdate,
+				 FILE_NAME = #{FILE_NAME},
+				 ORIGINAL_FILE_NAME  = #{ORIGINAL_FILE_NAME}
+		WHERE	 BOARD_NUM = #{BOARD_NUM}
+		
+	</update>
+
+
+
+
+
+	<select id="getListCountAll" resultType="int">
+		select count(*) from board where company_id= #{COMPANY_ID}
+	</select>
+
+	<select id="getListCount" resultType="int">
+		select count(*) from board where BOARD_DIVISION != 0  and company_id= #{COMPANY_ID}
+	</select>
+
+	<!-- 삭제를 확인용  -->
+	<select id="getDetail" resultType="board">
+		select * from board
+		where BOARD_NUM = #{BOARD_NUM}
+	</select>
+	
+	
+	<!-- 수정을 위해 한개만 select // resultMap에있는 값들 필요 -->
+	<select id="getDetailOne" resultType="board" resultMap="boardResultMap">
+		select * from board where BOARD_NUM = #{BOARD_NUM}
+	</select>
+	
+	
+
+
+	<!-- 
+		게시판 매핑 
+	 -->
+
+	<resultMap type="board" id="boardResultMap">
+		<id column="BOARD_NUM" jdbcType="BIGINT" property="BOARD_NUM"/>
+		<result column="COMPANY_ID" property="COMPANY_ID" />
+		<result column="BOARD_DIVISION" property="BOARD_DIVISION" />
+		<result column="WRITER" property="WRITER" />
+		<result column="SUBJECT" property="SUBJECT" />
+		<result column="CONTENT" property="CONTENT" />
+		<result column="STATUS" property="STATUS" />
+		<result column="PRIORITY" property="PRIORITY" />
+		<result column="START_DATE" property="START_DATE" />
+		<result column="END_DATE" property="END_DATE" />
+		<result column="WRITE_DATE" property="WRITE_DATE" />
+		<result column="MODIFY_DATE" property="MODIFY_DATE" />
+		<result column="PROGRESS" property="PROGRESS" />
+		<result column="FILE_NAME" property="FILE_NAME" />
+		<result column="ORIGINAL_FILE_NAME" property="ORIGINAL_FILE_NAME" />
+		<result column="READCOUNT" property="READCOUNT" />
+		<result column="BOARD_RE_REF" property="BOARD_RE_REF" />
+		<result column="BOARD_RE_LEV" property="BOARD_RE_LEV" />
+		<result column="BOARD_RE_SEQ" property="BOARD_RE_SEQ" />
+		
+	
+		
+		<collection column="BOARD_NUM" property="projectManagersList" ofType="com.passtoss.myhome.domain.ProjectManagers" javaType="List" select="getProjectManagers" />
+		<collection column="BOARD_NUM" property="subBoardList"  javaType="List"  select="getSubBoardList" />
+		<collection column="BOARD_NUM" property="getCommentList"  javaType="List"  select="getCommentList" />
+		
+	</resultMap>
+
+
+	<select id="getCommentList" resultType="com.passtoss.myhome.domain.Comment">
+		select C.*, M.USERNAME from 
+		comments C
+		LEFT JOIN MEMBER M ON (C.ID = M.ID)
+		where BOARD_NUM =#{BOARD_NUM}
+	</select>
+
+	
+	<select  id="getBoardList" resultType="board" resultMap="boardResultMap">
+		SELECT B.*, M.USERNAME
+		FROM BOARD B
+		LEFT JOIN MEMBER M ON (B.WRITER = M.ID)
+		WHERE B.COMPANY_ID = #{COMPANY_ID}
+		ORDER BY B.BOARD_RE_REF DESC, B.BOARD_RE_LEV ASC, B.BOARD_NUM ASC
+	</select>
+
+	<select id="getSubBoardList" resultType="board" resultMap="boardResultMap">
+		select * from board where BOARD_RE_LEV = 1 and BOARD_RE_REF = #{BOARD_NUM} 
+					order by BOARD_RE_REF desc,
+					BOARD_RE_LEV asc,
+					BOARD_NUM desc
+	</select>
+	
+	
+
+
+	<select id="getProjectManagers" resultType="com.passtoss.myhome.domain.ProjectManagers">
+		select member.id,member.username,member.PROFILE_IMG,projectmanagers.num,projectmanagers.board_num 
+			from projectmanagers 
+			left join member
+			on projectmanagers.id = member.id
+			where  projectmanagers.board_num = #{BOARD_NUM}
+	</select>
+
+
+
+	<insert id="insertSubWork">
+		<selectKey resultType="int" order="BEFORE" keyProperty="BOARD_NUM">
+			select nvl(max(BOARD_NUM),0)+1 from board
+		</selectKey>
+				
+				
+		INSERT into board
+				(BOARD_NUM,
+				 COMPANY_ID, BOARD_DIVISION, WRITER,
+				 SUBJECT,CONTENT,PROGRESS,STATUS,PRIORITY,
+				  START_DATE,END_DATE,MODIFY_DATE,
+				 BOARD_RE_REF,BOARD_RE_LEV,BOARD_RE_SEQ
+				)
+				 values
+				(#{BOARD_NUM},
+				 #{COMPANY_ID}, #{BOARD_DIVISION}, #{WRITER},
+				#{SUBJECT} , #{CONTENT},#{PROGRESS},#{STATUS},#{PRIORITY},
+				 #{START_DATE},#{END_DATE},#{MODIFY_DATE},
+				 #{BOARD_RE_REF},1,#{BOARD_RE_SEQ}
+				 )
+
+	
+	</insert>
+	
+	<delete id="deleteSubWork">
+		delete from board where BOARD_RE_REF = #{BOARD_RE_REF} and BOARD_RE_LEV  <![CDATA[ > ]]> 0
+	</delete>
+	
+
+
+	<select id="groupByStatus" resultType="java.util.Map">
+		select status,NVL(count(*),0) as count from board group by STATUS
+	</select>
+
+</mapper>

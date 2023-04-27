@@ -1,0 +1,87 @@
+@charset "UTF-8";
+
+#fileborder1{
+	background : white;
+	width: 100%;
+	height: 10%;
+	max-width: none;
+	/* padding-left: 0 !important;
+	padding-right: 0 !important; */
+	margin: 0; padding: 0;
+	
+}
+
+#fileborder2{
+	background : white;
+	width: 100%;
+	height: 5%;
+	max-width: none;
+	/* padding-left: 0 !important;
+	padding-right: 0 !important; */
+	margin: 0; padding: 0;
+	line-height: 40px;
+}
+
+#fileborder3{
+	background : white;
+	width: 100%;
+	height: 65%;
+	max-width: none;
+	/* padding-left: 0 !important;
+	padding-right: 0 !important; */
+	margin: 0; padding: 0;
+	unicode-bidi: isolate;
+}
+
+#filesearch {
+	padding-top: 15px !important;
+	width: 30%;
+    float: left;
+    padding-left: 15px !important;
+    background:#fff;
+    margin: auto;
+	margin-top : 10px;
+	margin-bottom : 5px;
+	padding: 1px 1px 1px 1px;
+}
+
+#filesearch > div{
+	border: 1px solid #d1d3e2;
+	border-radius: 0.15rem;
+}
+
+#filesearch > input{
+	border-radius: 0.15rem;
+	font-size: 12px
+}
+
+#listicon {
+	margin:10px;
+	display: inline-block;
+    float: right;
+    padding-top: 20px;
+    margin-right: 25px;
+}
+
+
+ul {
+    list-style:none;
+}
+ 
+li > div {
+    float: left;
+}
+
+.filename{
+	width: 60%;
+	text-align: center;
+}
+
+.username{
+	width: 20%;
+	text-align: center;
+}
+.date{
+	width: 20%;
+	text-align: center;
+}
