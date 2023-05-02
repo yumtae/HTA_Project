@@ -9,7 +9,7 @@
 		<version>2.6.11</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.passtoss</groupId>
+	<groupId>com.passtoss.myhome.passtoss</groupId>
 	<artifactId>PasstossFinal</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
