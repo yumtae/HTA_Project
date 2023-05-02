@@ -1,4 +1,4 @@
-package com;
+package com.passtoss.myhome;
 
 import javax.servlet.ServletContext;
 
