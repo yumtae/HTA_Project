@@ -1,7 +1,7 @@
 # HTA_Project
   과정명 : 컨테이너 애플리케이션 가상화를 통한 Cloud Office 구축 프로젝트 과정 <br/>
   관련분야 - 잔디, 슬랙 <br/>
-  사용언어 - Java, HTML, CSS, Bootstrap, JSP, EL, JSTL, JavaScript, jQuery, Ajax, JSON, SQL <br/>
+  사용언어 - Java11, HTML, CSS, Bootstrap, JSP, EL, JSTL, JavaScript, jQuery, Ajax, JSON, SQL <br/>
   개발도구 - Eclipse IDE ,sts, eclipse <br/>
   기타 S/W - 구글차트 , mybatis, 스프링부트, chart.js, scrollbar.js, fullcalendar.js <br/> <br/>
 
@@ -32,8 +32,10 @@
 
 ----------------------------------------------------------------------------- <br/>
 
--파이널프로젝트 (스프링부트와 mybtis,security를 이용한 게시판제작) (업로드 예정) <br/>
+-파이널프로젝트 (스프링부트와 mybtis,security를 이용한 게시판제작) <br/>
  <br/>
+★ 운영체제에 오라클 설치 필요 
+<br/>
 
   염재영 - 로그인, 회원가입, 프로필수정, 내 프로젝트/ 사내 관리자 <br/>
   염태근 - 메인(전체 게시판 연동), 알림기능, 업무현황  <br/>
